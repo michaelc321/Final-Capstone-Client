@@ -24,7 +24,7 @@ export const Register = (props) => {
                 "password": password.current.value
             }
 
-            return fetch("http://127.0.0.1:8000/register", {
+            return fetch("http://127.0.0.1:8000/register/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -35,7 +35,7 @@ export const Register = (props) => {
                 .then(res => res.json())
                 .then(res => {
                     if ("token" in res) {
-                        localStorage.setItem("lu_token", res.token)
+                        localStorage.setItem("users", res.token)
                         props.history.push("/")
                     }
                 })
