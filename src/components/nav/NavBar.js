@@ -5,13 +5,13 @@ import "./NavBar.css"
 export const NavBar = (props) => {
     return (
         <ul className="navbar">
-            <li className="navbar__item">
+            <li className="navbar__item" onClick={() => {props.history.push({ pathname: "/home" })}}>
                 Home
             </li>
-            <li className="navbar__item">
+            <li className="navbar__item" onClick={() => {props.history.push({ pathname: "/activity" })}}>
                 Activities
             </li>
-            <li className="navbar__item">
+            <li className="navbar__item" onClick={() => {props.history.push({ pathname: "/gallery" })}}>
                 Gallery
             </li>
             {

@@ -7,18 +7,20 @@ import { HomeContext } from "./HomeProvider";
 
 
 export const Home = (props) => {
-    const { deleteMain, updateMain } = useContext(HomeContext)
+    const { deleteLocation, updateMain } = useContext(HomeContext)
+    console.log(props.location)
     
 return(
 
-    <section className="mainContent" key={props.home.id}>
-    <h3 className="Main__name">{props.main.name}</h3>
-    <p className="details">{props.main.details}</p>
-    <p className="time">{props.main.date}</p>
-    <a href={props.main.link}>
+    <section className="mainContent" key={props.location.id}>
+    <h3 className="Main__name">{props.location.title}</h3>
+    <p className="details">{props.location.time}</p>
+    <p className="time">{props.location.description}</p>
+    <p className="time">{props.location.photo}</p>
+    {/* <a href={props.main.link}>
     <img className="imgURL" src={props.main.imageURL} />
-    </a>
-    <button onClick={() => deleteMain(props.main.id)}>Delete</button>
+    </a> */}
+    <button onClick={() => deleteLocation(props.location.id)}>Delete</button>
     <button 
         onClick={() => {
             props.history.push(`/main/edit/${props.main.id}`)

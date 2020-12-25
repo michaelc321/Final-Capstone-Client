@@ -13,17 +13,19 @@ export const HomeList = (props) => {
     const [ userHome, setUserHome ] = useState([])
 
 
+    console.log(locations)
     useEffect(() => {
         getLocation()
     }, [])
 
-    useEffect(() => {
-        const matchingNames = locations.filter(location => location.name.toLowerCase().includes(searchTerms.toLowerCase()))
-        setUserHome(matchingNames)
-    }, [searchTerms])
+
+    // useEffect(() => {
+    //     const matchingNames = locations.filter(location => location.title.toLowerCase().includes(searchTerms.toLowerCase()))
+    //     setUserHome(matchingNames)
+    // }, [searchTerms])
 
     useEffect(() => {
-        const filter = locations.filter(m => m.userId === parseInt(localStorage.getItem("users")))
+        const filter = locations.filter(l => l.user === parseInt(localStorage.getItem("users")))
         setUserHome(filter)
     }, [locations])
     
@@ -42,8 +44,14 @@ export const HomeList = (props) => {
             </div>
         <div className="main">
             <article className="mainList">
-    {userHome.map(home => <Home key={home.id} home={home}{...props}/>)
-    }
+    {/* {userHome.map(home => <Home key={home.id} home={home}{...props}/>)
+    } */}
+    {locations.map(location => {
+        return <Home
+                key={location.id}
+                location={location}
+                />
+    })}
             </article>
         </div>
         </>
