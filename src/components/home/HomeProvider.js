@@ -43,18 +43,12 @@ export const HomeProvider = (props) => {
     }
 
 
-
-    // GET ACTIVITIES
-    const getActivity = () => {
-        return fetch("http://localhost:8000/activities/")
-            .then(res => res.json())
-            .then(setActivity)
-    }
     // UPDATE LOCATIONS (HOME PAGE CARDS)
-    const updateLocations = (home) => {
-        return fetch(`http://localhost:8088/locations/${home.id}`, {
+    const updateLocation = (home) => {
+        return fetch(`http://localhost:8000/locations/${home.id}`, {
             method: "PUT",
             headers: {
+                "Authorization": `Token ${localStorage.getItem("users")}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(home)
@@ -62,9 +56,16 @@ export const HomeProvider = (props) => {
             .then(getLocation)
     }
 
+    // GET ACTIVITIES
+    const getActivity = () => {
+        return fetch("http://localhost:8000/activities/")
+            .then(res => res.json())
+            .then(setActivity)
+    }
+
     return (
         <HomeContext.Provider value={{
-            locations, activities, getLocation, addLocation, getActivity, updateLocations, deleteLocation
+            locations, activities, getLocation, addLocation, getActivity, updateLocation, deleteLocation
         }}>
             {props.children}
         </HomeContext.Provider>

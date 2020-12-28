@@ -8,7 +8,7 @@ import { HomeContext } from "./HomeProvider";
 
 export const Home = (props) => {
     const { deleteLocation, updateMain } = useContext(HomeContext)
-    console.log(props.location)
+    console.log(props)
     
 return(
 
@@ -23,7 +23,7 @@ return(
     <button onClick={() => deleteLocation(props.location.id)}>Delete</button>
     <button 
         onClick={() => {
-            props.history.push(`/main/edit/${props.main.id}`)
+            props.history.push(`/main/edit/${props.location.id}`)
         }}>Edit</button>
     </section>
 )

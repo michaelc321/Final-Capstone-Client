@@ -18,6 +18,10 @@ export const ApplicationViews = () => {
                         <HomeForm {...props} />
                         </>
                 }} />
+
+                <Route path="/main/edit/:locationId(\d+)" render={(props) => {
+                    return <HomeForm {...props} />
+                }} />
         </HomeProvider>
     </> )
 }

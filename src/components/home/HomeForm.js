@@ -5,7 +5,7 @@ import { HomeContext } from "./HomeProvider"
 
 
 export const HomeForm = (props) => {
-    const { addLocation, updateLocations, getLocation, locations } = useContext(HomeContext)
+    const { addLocation, updateLocation, getLocation, locations } = useContext(HomeContext)
     // const { addPhotos, updatePhotos, getPhotos, photos} = useContext(PhotoContext)
 
 
@@ -49,12 +49,11 @@ export const HomeForm = (props) => {
 
 
         if (editMode) {
-            updateLocations({
-                name: location.title,
-                details: location.medium,
-                imageURL: location.imageURL,
-                date: location.time,
-                link: location.link,
+            updateLocation({
+                title: location.title,
+                description: location.medium,
+                photo: photo,
+                time: location.time,
                 id: location.id,
                 userId: userId
             })

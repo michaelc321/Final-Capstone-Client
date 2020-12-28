@@ -50,6 +50,7 @@ export const HomeList = (props) => {
         return <Home
                 key={location.id}
                 location={location}
+                {...props}
                 />
     })}
             </article>
