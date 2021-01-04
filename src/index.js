@@ -1,13 +1,14 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { BrowserRouter as Router } from "react-router-dom"
-import { LevelUp } from "./components/LevelUp.js"
+import { VacaPlus } from "./components/VacaPlus.js"
 import "./index.css"
+import 'semantic-ui-css/semantic.min.css'
 
 ReactDOM.render(
     <React.StrictMode>
         <Router>
-            <LevelUp />
+            <VacaPlus />
         </Router>
     </React.StrictMode>,
     document.getElementById("root")

@@ -1,37 +1,41 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { Input, Menu, Icon } from 'semantic-ui-react'
+import { HomeSearch } from "../home/HomeSearch";
 import "./NavBar.css"
 
 export const NavBar = (props) => {
     return (
-        <ul className="navbar">
-            <li className="navbar__item">
-                Navigation link
-            </li>
-            <li className="navbar__item">
-                Navigation link
-            </li>
-            <li className="navbar__item">
-                Navigation link
-            </li>
-            {
-                (localStorage.getItem("lu_token") !== null) ?
-                    <li className="nav-item">
-                        <button className="nav-link fakeLink"
-                            onClick={() => {
-                                localStorage.removeItem("lu_token")
-                                props.history.push({ pathname: "/" })
-                            }}
-                        >Logout</button>
-                    </li> :
-                    <>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/login">Login</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/register">Register</Link>
-                        </li>
-                    </>
-            }        </ul>
+        <div className="colornavbar">
+        <Menu secondary>
+        <Menu.Item
+          name='home'
+          onClick={() => {props.history.push({ pathname: "/home" })}}
+        />
+        <Menu.Item
+          name='activity'
+          onClick={() => {props.history.push({ pathname: "/activity" })}}
+        />
+        <Menu.Item
+          name='gallery'
+          onClick={() => {props.history.push({ pathname: "/gallery" })}}
+        />
+        {/* <Menu.Menu position='right'>
+            <img className="navbar-img" src={require('../home/images/VacaPlus.png')} />
+        </Menu.Menu> */}
+        <Menu.Menu position='right'>
+          <Menu.Item>
+            <p icon="" />
+          </Menu.Item>
+          <Icon className="logout-icon" name="sign out" />
+         <Menu.Item
+            name='logout'
+            onClick={() => {localStorage.removeItem("users")
+                            props.history.push({ pathname: "/" })
+                                    }}
+          />
+        </Menu.Menu>
+      </Menu>
+      </div>
     )
 }
