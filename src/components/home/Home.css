@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+.main-content {
+    background: url("./images/backgroundimage.jpeg") no-repeat fixed center;
+}
+
+.top-content,
+.form--content {
+    height: 98vh;
+    background: url("./images/backgroundimage.jpeg") no-repeat fixed center;
+}
+
+.main-img {
+    display:block;
+    margin:auto;
+    height: 55%;
+}
+.main-title {
+    display: flex;
+    justify-content: center;
+    font-size: 13vh;
+    font-family: 'Courgette', cursive;
+}
+
+.search-add {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* CARD ****************************** */
+.mainList {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card-holder {
+    margin: 1rem 2.5rem;
+}
+
+/* Card Footer */
+.spacer {
+    margin-left: 15px;
+}
+
+.delete,
+.edit {
+    margin-left: 20px;
+}
+/* CARD ****************************** */

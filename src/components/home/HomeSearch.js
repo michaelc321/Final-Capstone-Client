@@ -1,4 +1,5 @@
 import React, { useContext } from "react"
+import { Input, Menu } from 'semantic-ui-react'
 import { HomeContext } from "./HomeProvider"
 
 export const HomeSearch = () => {
@@ -6,8 +7,9 @@ export const HomeSearch = () => {
 
     return (
         <>
-            <input className="search" type="text"
-            onChange={(changeEvent) => {
+             <Input icon='search' placeholder='Search...' 
+            onChange={
+                (changeEvent) => {
                     setLocations(changeEvent.target.value)
                 }
             }

@@ -1,10 +1,16 @@
-.navbar {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: left;
+.colornavbar {
+    background: transparent;
+    background: url("../home/images/backgroundimage.jpeg") no-repeat fixed center;
 }
 
-.navbar__item {
-    flex-basis: 20%;
-    list-style-type: none;
+.item {
+    font-size: large;
+}
+
+.logout-icon {
+    padding-top: 10.5px;
+}
+
+.navbar-img {
+    height: 150px;
 }

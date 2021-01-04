@@ -7,6 +7,8 @@ export const HomeProvider = (props) => {
     const [activities, setActivity] = useState([])
     const [searchLocations, setLocations] = useState("")
 
+
+
     // GET LOCATIONS
     const getLocation = () => {
         return fetch("http://localhost:8000/locations", {
@@ -63,9 +65,33 @@ export const HomeProvider = (props) => {
             .then(setActivity)
     }
 
+
+    //  const addPhotos = Photo => {
+    //     return fetch("http://localhost:8000/photos", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(Photo)
+    //     })
+    //         .then(getPhotos)
+    // }
+
+    // const updatePhotos = (photo) => {
+    //     return fetch(`http://localhost:8000/projects/${photo.id}`, {
+    //         method: "PUT",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(photo)
+    //     })
+    //         .then(getPhotos)
+    // }
+
+
     return (
         <HomeContext.Provider value={{
-            locations, activities, getLocation, addLocation, getActivity, updateLocation, deleteLocation
+            locations, activities, getLocation, addLocation, getActivity, updateLocation, deleteLocation, searchLocations, setLocations
         }}>
             {props.children}
         </HomeContext.Provider>

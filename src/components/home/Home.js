@@ -1,30 +1,44 @@
 import React, { useState, useContext, useEffect } from "react"
 import { HomeContext } from "./HomeProvider";
-// import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Card, Icon, Image } from 'semantic-ui-react'
+import "./Home.css"
 
 
-// import "./Main.css"
 
 
 export const Home = (props) => {
     const { deleteLocation, updateMain } = useContext(HomeContext)
-    console.log(props)
+    console.log(props.location.photo)
+    // Cut out part of unusable link, salvaged working part and added https
+    const realphoto = 'https://' + props.location.photo.slice(31)
+    const year = props.location.time.slice(0, 4)
+    console.log(realphoto)
     
 return(
-
-    <section className="mainContent" key={props.location.id}>
-    <h3 className="Main__name">{props.location.title}</h3>
-    <p className="details">{props.location.time}</p>
-    <p className="time">{props.location.description}</p>
-    <p className="time">{props.location.photo}</p>
-    {/* <a href={props.main.link}>
-    <img className="imgURL" src={props.main.imageURL} />
-    </a> */}
-    <button onClick={() => deleteLocation(props.location.id)}>Delete</button>
-    <button 
+<section className="card-holder">
+    <Card>
+    <img src={realphoto} style={{width: '291px', height:'310px'}} />
+    <Card.Content>
+      <Card.Header>{props.location.title}</Card.Header>
+      <Card.Meta>
+        <span className='date'>Added in {year}</span>
+      </Card.Meta>
+      <Card.Description>
+        {props.location.description}
+      </Card.Description>
+    </Card.Content>
+    <Card.Content extra>
+      <a>
+        <Icon name='volleyball ball' />
+        View Activities
+      </a><strong className="spacer">|</strong>
+    <button className="delete" onClick={() => deleteLocation(props.location.id)}>Delete</button>
+    <button className="edit"
         onClick={() => {
-            props.history.push(`/main/edit/${props.location.id}`)
+            props.history.push(`/location/edit/${props.location.id}`)
         }}>Edit</button>
-    </section>
+    </Card.Content>
+  </Card>
+  </section>
 )
     }

@@ -1,51 +1,60 @@
 import React, { useContext, useEffect, useState } from "react"
 import { HomeContext } from "./HomeProvider"
 import { Home} from "./Home"
-import { Button } from 'react-bootstrap';
-import { Link } from "react-router-dom"
 import { HomeSearch } from "./HomeSearch";
+import "./Home.css"
+import { Button, Icon } from 'semantic-ui-react'
 
-// import "./Mains.css"
 
 export const HomeList = (props) => {
 
-    const { locations, getLocation, searchTerms } = useContext(HomeContext)
+    const { locations, getLocation, searchLocations } = useContext(HomeContext)
     const [ userHome, setUserHome ] = useState([])
 
-
-    console.log(locations)
+    
+    console.log(userHome)
     useEffect(() => {
         getLocation()
+        console.log('1st one ran')
     }, [])
-
-
-    // useEffect(() => {
-    //     const matchingNames = locations.filter(location => location.title.toLowerCase().includes(searchTerms.toLowerCase()))
-    //     setUserHome(matchingNames)
-    // }, [searchTerms])
-
+    
+    
+    useEffect(() => {
+        const matchingNames = locations.filter(location => location.title.toLowerCase().includes(searchLocations.toLowerCase()))
+        setUserHome(matchingNames)
+        console.log('2nd one ran')
+    }, [searchLocations])
+    
     useEffect(() => {
         const filter = locations.filter(l => l.user === parseInt(localStorage.getItem("users")))
         setUserHome(filter)
+        console.log('3rd one ran')
     }, [locations])
+    
     
     return (
         <>
-            <HomeSearch />
-            <section className="header-btn">
-                <div className="cursive">VacaPlus</div>
-                {/* <img src={require()} style={{width: '120px', height: '120px'}} /> */}
-                {/* <h1 className="title">VacaPlus<img src={require()} style={{width: '62px', height: '62px'}} /></h1> */}
-                </section>
-            <div className="mainBtnTop">
-            <button class="mainBtn" onClick={() => props.history.push("/projects/create")}>
-                Add Card
-            </button>
+        <section className="top-content">
+           <img className="main-img" src={require('./images/travel.png')} />
+           <h1 className="main-title">VacaPlus</h1>
+           <Button inverted color='blue'>
+            <Icon name='angle double down' />
+            <a href="#location-cards">Move to Content</a>
+            </Button>
+        </section>
+        <section className="main-content" id="location-cards">
+            <div className="search-add">
+                <div>
+                    <HomeSearch />
+                </div>
+                <div className="mainBtnTop">
+                    <button class="mainBtn" onClick={() => props.history.push("/location/create")}>
+                        Add Card
+                    </button>
+                </div>
             </div>
         <div className="main">
             <article className="mainList">
-    {/* {userHome.map(home => <Home key={home.id} home={home}{...props}/>)
-    } */}
     {locations.map(location => {
         return <Home
                 key={location.id}
@@ -55,6 +64,7 @@ export const HomeList = (props) => {
     })}
             </article>
         </div>
+        </section>
         </>
     )
 }

@@ -36,7 +36,7 @@ export const Register = (props) => {
                 .then(res => {
                     if ("token" in res) {
                         localStorage.setItem("users", res.token)
-                        props.history.push("/")
+                        props.history.push("/home")
                     }
                 })
         } else {

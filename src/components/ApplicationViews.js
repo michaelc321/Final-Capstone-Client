@@ -13,13 +13,13 @@ export const ApplicationViews = () => {
                         </>
                 }} />
 
-                <Route exact path="/projects/create" render={(props) => {
+                <Route exact path="/location/create" render={(props) => {
                     return <>
                         <HomeForm {...props} />
                         </>
                 }} />
 
-                <Route path="/main/edit/:locationId(\d+)" render={(props) => {
+                <Route path="/location/edit/:locationId(\d+)" render={(props) => {
                     return <HomeForm {...props} />
                 }} />
         </HomeProvider>
