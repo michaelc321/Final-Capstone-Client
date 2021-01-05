@@ -6,6 +6,7 @@ export const HomeProvider = (props) => {
     const [locations, setLocation] = useState([])
     const [activities, setActivity] = useState([])
     const [searchLocations, setLocations] = useState("")
+    const [ userSearchTerms, setUserSearchTerms ] = useState([])
 
 
 
@@ -91,7 +92,7 @@ export const HomeProvider = (props) => {
 
     return (
         <HomeContext.Provider value={{
-            locations, activities, getLocation, addLocation, getActivity, updateLocation, deleteLocation, searchLocations, setLocations
+            locations, activities, getLocation, addLocation, getActivity, updateLocation, deleteLocation, userSearchTerms, setUserSearchTerms
         }}>
             {props.children}
         </HomeContext.Provider>

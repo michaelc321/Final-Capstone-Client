@@ -52,7 +52,7 @@ export const HomeForm = (props) => {
         const userId = parseInt(localStorage.getItem("users"))
 
         if (editMode) {
-            if (location.title && location.description && location.time) {
+            if (location.title && location.description && location.time && location.activity) {
             updateLocation({
                 title: location.title,
                 description: location.description,
@@ -67,7 +67,7 @@ export const HomeForm = (props) => {
                 window.alert("Please fill in all fields.")
             }
         } else {
-            if (location.title && location.description && photo && location.time) {
+            if (location.title && location.description && photo && location.time && location.activity) {
             addLocation({
                 title: location.title,
                 description: location.description,
@@ -134,7 +134,7 @@ export const HomeForm = (props) => {
                     <label htmlFor="locationTitle">Place Visited: </label>
                     <input type="text" name="title" id="locationTitle" required autoFocus className="form-control" 
                     placeholder="Enter Text"
-                    defaultValue={location.name}
+                    defaultValue={location.title}
                     onChange={handleControlledInputChange} />
                 </div>
             </fieldset>
@@ -143,7 +143,7 @@ export const HomeForm = (props) => {
                     <label htmlFor="size">Details: </label>
                     <textarea type="text" name="description" id="description" required autoFocus className="form-control" 
                     placeholder="Enter Text"
-                    defaultValue={location.details}
+                    defaultValue={location.description}
                     onChange={handleControlledInputChange} />
                 </div>
             </fieldset>

@@ -10,28 +10,32 @@ import { Button, Icon } from 'semantic-ui-react'
 
 export const HomeList = (props) => {
 
-    const { locations, getLocation, searchLocations } = useContext(HomeContext)
+    const { locations, getLocation, userSearchTerms } = useContext(HomeContext)
+
     const [ userHome, setUserHome ] = useState([])
 
     
     console.log(userHome)
+    console.log(locations)
+    console.log(userSearchTerms)
+
     useEffect(() => {
         getLocation()
         console.log('1st one ran')
     }, [])
     
-    
     useEffect(() => {
-        const matchingNames = locations.filter(location => location.title.toLowerCase().includes(searchLocations.toLowerCase()))
-        setUserHome(matchingNames)
-        console.log('2nd one ran')
-    }, [searchLocations])
-    
-    useEffect(() => {
-        const filter = locations.filter(l => l.user === parseInt(localStorage.getItem("users")))
-        setUserHome(filter)
+        setUserHome(locations)
         console.log('3rd one ran')
     }, [locations])
+
+
+    useEffect(() => {
+        const matchingNames = locations.filter(location => location.title.toLowerCase().includes(userSearchTerms.toString().toLowerCase()))
+        setUserHome(matchingNames) 
+        console.log('2nd one ran')
+    }, [userSearchTerms])
+    
     
     
     return (
@@ -66,7 +70,7 @@ export const HomeList = (props) => {
             </div>
         <div className="main">
             <article className="mainList">
-                {locations.map(location => {
+                {userHome.map(location => {
                     return <Home
                             key={location.id}
                             location={location}
@@ -75,10 +79,12 @@ export const HomeList = (props) => {
                 })}
             </article>
         </div>
+        <div className="move-btn">
         <Button inverted color='blue'>
             <Icon name='angle double down' />
             <a href="#activity-content">Move to Activities</a>
             </Button>
+            </div>
         </section>
         <section className="footer-content" id="activity-content">
             <article className="mainList-activity">
@@ -87,7 +93,7 @@ export const HomeList = (props) => {
                 Activities
             </div>
                 <div className="activity-resize">
-                    {locations.map(location => {
+                    {userHome.map(location => {
                         return <Activity
                                 key={location.id}
                                 location={location}
@@ -96,10 +102,12 @@ export const HomeList = (props) => {
                     })}
                 </div>
             </article>
-            <Button inverted color='blue'>
+            <div className="move-btn">
+            <Button inverted color='blue' className="move-btn">
             <Icon name='angle double up' />
             <a href="#home">Back to top</a>
             </Button>
+            </div>
         </section>
         </>
     )

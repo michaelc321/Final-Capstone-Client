@@ -12,7 +12,7 @@ export const ActivityModal = (props) => {
       onOpen={() => setOpen(true)}
       open={open}
       size='small'
-      trigger={<p>View Activities</p>}
+      trigger={<p>View Activity</p>}
     >
       <Header icon>
         <Icon name='volleyball ball' />
