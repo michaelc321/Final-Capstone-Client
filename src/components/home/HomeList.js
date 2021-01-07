@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 import { HomeContext } from "./HomeProvider"
 import { Home} from "./Home"
 import { Activity } from "./Activity";
+import { ActivityInfo } from "./ActivityInfo";
 import { HomeSearch } from "./HomeSearch";
 import { NavBar } from "../nav/NavBar";
 import "./Home.css"
@@ -10,24 +11,28 @@ import { Button, Icon } from 'semantic-ui-react'
 
 export const HomeList = (props) => {
 
-    const { locations, getLocation, userSearchTerms } = useContext(HomeContext)
+    const { locations, getLocations, activities, getActivities, userSearchTerms } = useContext(HomeContext)
 
     const [ userHome, setUserHome ] = useState([])
+    const [ userActivities, setUserActivities ] = useState([])
 
     
     console.log(userHome)
+    console.log(userActivities)
     console.log(locations)
-    console.log(userSearchTerms)
+    console.log(activities)
 
     useEffect(() => {
-        getLocation()
+        getLocations()
+        getActivities()
         console.log('1st one ran')
     }, [])
     
     useEffect(() => {
         setUserHome(locations)
+        setUserActivities(activities)
         console.log('3rd one ran')
-    }, [locations])
+    }, [locations, activities])
 
 
     useEffect(() => {
@@ -100,6 +105,13 @@ export const HomeList = (props) => {
                                 {...props}
                                 />
                     })}
+                    {userActivities.map(activities => {
+                    return <ActivityInfo
+                            key={activities.id}
+                            activities={activities}
+                            {...props}
+                            />
+                })}
                 </div>
             </article>
             <div className="move-btn">

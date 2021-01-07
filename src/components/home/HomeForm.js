@@ -5,7 +5,7 @@ import "./Home.css"
 
 
 export const HomeForm = (props) => {
-    const { addLocation, updateLocation, getLocation, locations, addPhotos } = useContext(HomeContext)
+    const { addLocation, updateLocation, getLocations, locations, addPhotos } = useContext(HomeContext)
    
     const [photo, setPhoto] = useState('')
     const [loading, setLoading] = useState(false)
@@ -39,7 +39,7 @@ export const HomeForm = (props) => {
         }
     }
     useEffect(() => {
-        getLocation()
+        getLocations()
     }, [])
     
     useEffect(() => {

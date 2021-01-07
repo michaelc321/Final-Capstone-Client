@@ -3,15 +3,15 @@ import React, { useState, useEffect } from "react"
 export const HomeContext = React.createContext()
 
 export const HomeProvider = (props) => {
-    const [locations, setLocation] = useState([])
-    const [activities, setActivity] = useState([])
-    const [searchLocations, setLocations] = useState("")
+    const [locations, setLocations] = useState([])
+    const [activities, setActivities] = useState([])
+    // const [searchLocations, setLocations] = useState("")
     const [ userSearchTerms, setUserSearchTerms ] = useState([])
 
 
 
     // GET LOCATIONS
-    const getLocation = () => {
+    const getLocations = () => {
         return fetch("http://localhost:8000/locations", {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("users")}`,
@@ -19,7 +19,7 @@ export const HomeProvider = (props) => {
             }
         })
             .then(res => res.json())
-            .then(setLocation)
+            .then(setLocations)
     }
 
     const addLocation = location => {
@@ -31,7 +31,6 @@ export const HomeProvider = (props) => {
             },
             body: JSON.stringify(location)
         })
-            .then(getLocation)
     }
 
     const deleteLocation = locationId => {
@@ -42,7 +41,7 @@ export const HomeProvider = (props) => {
                 "Content-Type": "application/json"
             }
         })
-            .then(getLocation)
+            .then(getLocations)
     }
 
 
@@ -56,15 +55,33 @@ export const HomeProvider = (props) => {
             },
             body: JSON.stringify(home)
         })
-            .then(getLocation)
+            .then(getLocations)
     }
 
     // GET ACTIVITIES
-    const getActivity = () => {
-        return fetch("http://localhost:8000/activities/")
+    const getActivities = () => {
+        return fetch("http://localhost:8000/activities", {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("users")}`,
+                "Content-Type": "application/json"
+            }
+        })
             .then(res => res.json())
-            .then(setActivity)
+            .then(setActivities)
     }
+
+    const addActivities = activity => {
+        return fetch("http://localhost:8000/activities", {
+            method: "POST",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("users")}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(activity)
+        })
+            .then(setActivities)
+    }
+
 
 
     //  const addPhotos = Photo => {
@@ -92,7 +109,7 @@ export const HomeProvider = (props) => {
 
     return (
         <HomeContext.Provider value={{
-            locations, activities, getLocation, addLocation, getActivity, updateLocation, deleteLocation, userSearchTerms, setUserSearchTerms
+            locations, activities, getLocations, addLocation, addActivities, getActivities, updateLocation, deleteLocation, userSearchTerms, setUserSearchTerms
         }}>
             {props.children}
         </HomeContext.Provider>
