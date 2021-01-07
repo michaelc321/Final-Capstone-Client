@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react"
 import { HomeContext } from "./HomeProvider"
 import { Home} from "./Home"
 import { Activity } from "./Activity";
-import { ActivityInfo } from "./ActivityInfo";
 import { HomeSearch } from "./HomeSearch";
 import { NavBar } from "../nav/NavBar";
 import "./Home.css"
@@ -71,6 +70,9 @@ export const HomeList = (props) => {
                     <button class="mainBtn" onClick={() => props.history.push("/location/create")}>
                         Add Card
                     </button>
+                    <button class="mainBtn" onClick={() => props.history.push("/activity/create")}>
+                        Add Activity
+                    </button>
                 </div>
             </div>
         <div className="main">
@@ -97,7 +99,7 @@ export const HomeList = (props) => {
                 <Icon name='volleyball ball' className="footer-h1" />
                 Activities
             </div>
-                <div className="activity-resize">
+            <article className="activity-resize">
                     {userHome.map(location => {
                         return <Activity
                                 key={location.id}
@@ -105,14 +107,7 @@ export const HomeList = (props) => {
                                 {...props}
                                 />
                     })}
-                    {userActivities.map(activities => {
-                    return <ActivityInfo
-                            key={activities.id}
-                            activities={activities}
-                            {...props}
-                            />
-                })}
-                </div>
+            </article>
             </article>
             <div className="move-btn">
             <Button inverted color='blue' className="move-btn">

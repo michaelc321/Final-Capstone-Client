@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react"
 import { HomeContext } from "./HomeProvider"
+import { ActivityForm } from "./ActivityForm";
 import { Button } from 'semantic-ui-react'
 import "./Home.css"
 
 
 export const HomeForm = (props) => {
-    const { addLocation, updateLocation, getLocations, locations, addPhotos } = useContext(HomeContext)
+    const { addLocation, updateLocation, getLocations,getActivities, locations, activities, addActivity } = useContext(HomeContext)
    
     const [photo, setPhoto] = useState('')
     const [loading, setLoading] = useState(false)
@@ -25,8 +26,9 @@ export const HomeForm = (props) => {
     const editMode = props.match.params.hasOwnProperty("locationId") 
     
     const handleControlledInputChange = (event) => {
+
         const newlocation = Object.assign({}, location)         
-        newlocation[event.target.name] = event.target.value     
+        newlocation[event.target.name] = event.target.value 
         setLocation(newlocation)                                
     }
     
@@ -40,13 +42,14 @@ export const HomeForm = (props) => {
     }
     useEffect(() => {
         getLocations()
+        getActivities()
     }, [])
     
     useEffect(() => {
         getLocationInEditMode()
     }, [locations])
     
-    
+    console.log(location)
     const constructNewlocation = () => {
         
         const userId = parseInt(localStorage.getItem("users"))
@@ -58,7 +61,9 @@ export const HomeForm = (props) => {
                 description: location.description,
                 photo: editModeSlicedPhoto(),
                 time: location.time,
-                activity: location.activity,
+                activity: parseInt(location.activity),
+                // activity2: parseInt(location.activity2),
+                // activity3: parseInt(location.activity3),
                 id: location.id,
                 user: userId
             })
@@ -72,7 +77,9 @@ export const HomeForm = (props) => {
                 title: location.title,
                 description: location.description,
                 photo: photo,
-                activity: location.activity,
+                activity: parseInt(location.activity),
+                // activity2: parseInt(location.activity2),
+                // activity3: parseInt(location.activity3),
                 time: location.time,
                 user: userId
             })
@@ -152,15 +159,53 @@ export const HomeForm = (props) => {
             min="2020-01-01" max="2200-12-31" defaultValue={location.time} onChange={handleControlledInputChange}>     
             </input>
             </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="locationLink">Activities: </label>
-                    <input type="text" name="activity" id="locationActivity" required autoFocus className="form-control" 
-                    placeholder="Enter Activites"
-                    defaultValue={location.activity}
-                    onChange={handleControlledInputChange} />
-                </div>
-            </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <select name="activity" className="form-control"
+                            // value={activities.name}
+                            onChange={handleControlledInputChange}
+                        >
+                            <option value="0">Activity Select</option>
+                            {
+                                activities.map(a => {
+                                    return <option key={a.id} value={a.id}>{a.name}</option>
+                                })
+                            }
+                        </select>
+                    </div>
+                </fieldset>
+                {/* <fieldset>
+                    <div className="form-group">
+                        <select name="activity" className="form-control"
+                            value={activities.name}
+                            onChange={handleControlledInputChange}
+                        >
+                            <option value="0">Activity Select</option>
+                            {
+                                activities.map(a => {
+                                    return <option key={a.id} value={a.id}>{a.name}</option>
+                                })
+                            }
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <select name="activity" className="form-control"
+                            value={activities.name}
+                            onChange={handleControlledInputChange}
+                        >
+                            <option value="0">Activity Select</option>
+                            {
+                                activities.map(a => {
+                                    return <option key={a.id} value={a.id}>{a.name}</option>
+                                })
+                            }
+                        </select>
+                    </div>
+                </fieldset> */}
+
+            
             <button type="submit"
                 onClick={evt => {
                     evt.preventDefault()
