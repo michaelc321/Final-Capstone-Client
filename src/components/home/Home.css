@@ -6,9 +6,12 @@ html {
 
 .main-content {
     background: url("./images/backgroundimage.jpeg") no-repeat fixed center;
+    padding-bottom: 20%;
 }
 
+
 .top-content,
+.footer-content,
 .form--content {
     height: 98vh;
     background: url("./images/backgroundimage.jpeg") no-repeat fixed center;
@@ -26,6 +29,16 @@ html {
     font-family: 'Courgette', cursive;
 }
 
+.content-btn {
+   display: flex;
+   justify-content: center;
+}
+
+.content-btn a {
+    padding: 1rem;
+    font-size: 2vh;
+ }
+
 .search-add {
     display: flex;
     flex-direction: column;
@@ -39,6 +52,37 @@ html {
     flex-wrap: wrap;
 }
 
+.mainList-activity {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    background: url("./images/background.jpeg") no-repeat fixed center;
+    height: 90vh;
+    width: 85vw;
+    border-radius: 2%;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 4px 1px 7px 5px gray; 
+    opacity: 0.8;
+}
+
+
+.footerIcon-h1 {
+    display: flex;
+    flex-direction: row;
+    font-size: 4vh;
+}
+
+.activity-resize {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.img-btn {
+    border: 1px solid black;
+}
+
 .card-holder {
     margin: 1rem 2.5rem;
 }
@@ -48,8 +92,31 @@ html {
     margin-left: 15px;
 }
 
+.extra {
+    display: flex;
+}
+
+.extra a {
+    display: flex;
+}
+
 .delete,
 .edit {
     margin-left: 20px;
 }
 /* CARD ****************************** */
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-remove {
+    margin-top: 10%;
+}
+
+.move-btn {
+    display: flex;
+    justify-content: center;
+}

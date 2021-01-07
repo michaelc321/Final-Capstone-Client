@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react"
 import { HomeContext } from "./HomeProvider"
+import { Button } from 'semantic-ui-react'
 import "./Home.css"
 
 
 export const HomeForm = (props) => {
-    const { addLocation, updateLocation, getLocation, locations, addPhotos } = useContext(HomeContext)
+    const { addLocation, updateLocation, getLocations, locations, addPhotos } = useContext(HomeContext)
    
     const [photo, setPhoto] = useState('')
     const [loading, setLoading] = useState(false)
@@ -38,7 +39,7 @@ export const HomeForm = (props) => {
         }
     }
     useEffect(() => {
-        getLocation()
+        getLocations()
     }, [])
     
     useEffect(() => {
@@ -51,12 +52,13 @@ export const HomeForm = (props) => {
         const userId = parseInt(localStorage.getItem("users"))
 
         if (editMode) {
-            if (location.title && location.description && location.time) {
+            if (location.title && location.description && location.time && location.activity) {
             updateLocation({
                 title: location.title,
                 description: location.description,
                 photo: editModeSlicedPhoto(),
                 time: location.time,
+                activity: location.activity,
                 id: location.id,
                 user: userId
             })
@@ -65,11 +67,12 @@ export const HomeForm = (props) => {
                 window.alert("Please fill in all fields.")
             }
         } else {
-            if (location.title && location.description && photo && location.time) {
+            if (location.title && location.description && photo && location.time && location.activity) {
             addLocation({
                 title: location.title,
                 description: location.description,
                 photo: photo,
+                activity: location.activity,
                 time: location.time,
                 user: userId
             })
@@ -109,7 +112,7 @@ export const HomeForm = (props) => {
                     <img src={editModeSlicedPhoto()} alt={location.title} style={{width: '300px', height:'300px'}} />
                 </div>) : (
                     <div className="form-group">
-                    <div className="photo-select"><label className="form-group" for="locationImage">Select Photo</label></div>
+                    <div className="photo-select"><label className="form-group img-btn" for="locationImage" class="ui button">Select Image</label></div>
                     <input type="file" 
                             name="file" 
                             id="locationImage" 
@@ -131,7 +134,7 @@ export const HomeForm = (props) => {
                     <label htmlFor="locationTitle">Place Visited: </label>
                     <input type="text" name="title" id="locationTitle" required autoFocus className="form-control" 
                     placeholder="Enter Text"
-                    defaultValue={location.name}
+                    defaultValue={location.title}
                     onChange={handleControlledInputChange} />
                 </div>
             </fieldset>
@@ -140,7 +143,7 @@ export const HomeForm = (props) => {
                     <label htmlFor="size">Details: </label>
                     <textarea type="text" name="description" id="description" required autoFocus className="form-control" 
                     placeholder="Enter Text"
-                    defaultValue={location.details}
+                    defaultValue={location.description}
                     onChange={handleControlledInputChange} />
                 </div>
             </fieldset>
@@ -151,10 +154,10 @@ export const HomeForm = (props) => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="locationLink">Website: </label>
-                    <input type="text" name="link" id="locationLink" required autoFocus className="form-control" 
-                    placeholder="Enter URL"
-                    defaultValue={location.link}
+                    <label htmlFor="locationLink">Activities: </label>
+                    <input type="text" name="activity" id="locationActivity" required autoFocus className="form-control" 
+                    placeholder="Enter Activites"
+                    defaultValue={location.activity}
                     onChange={handleControlledInputChange} />
                 </div>
             </fieldset>

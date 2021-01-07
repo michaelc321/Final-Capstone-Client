@@ -12,7 +12,7 @@ export const VacaPlus = () => (
             if (localStorage.getItem("users")) {
                 return (
                     <>
-                        <Route render={props => <NavBar {...props} />} />
+                        {/* <Route render={props => <NavBar {...props} />} /> */}
                         <Route render={props => <ApplicationViews {...props} />} />
                     </>
                 )

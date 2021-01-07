@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react"
 import { HomeContext } from "./HomeProvider";
+import { ActivityModal } from "./ActivityModal";
 import { Card, Icon, Image } from 'semantic-ui-react'
 import "./Home.css"
 
@@ -27,10 +28,10 @@ return(
         {props.location.description}
       </Card.Description>
     </Card.Content>
-    <Card.Content extra>
+    <Card.Content extra className="extra">
       <a>
         <Icon name='volleyball ball' />
-        View Activities
+        <ActivityModal {...props}/>
       </a><strong className="spacer">|</strong>
     <button className="delete" onClick={() => deleteLocation(props.location.id)}>Delete</button>
     <button className="edit"
