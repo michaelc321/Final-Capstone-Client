@@ -6,7 +6,7 @@ import "./Home.css"
 
 
 export const HomeForm = (props) => {
-    const { addLocation, updateLocation, getLocations,getActivities, locations, activities, addActivity } = useContext(HomeContext)
+    const { addLocation, updateLocation, getLocations,getActivities, locations, activities, addActivity, addLocationActivities } = useContext(HomeContext)
    
     const [photo, setPhoto] = useState('')
     const [loading, setLoading] = useState(false)
@@ -161,9 +161,10 @@ export const HomeForm = (props) => {
             </fieldset>
                 <fieldset>
                     <div className="form-group">
-                        <select name="activity" className="form-control"
+                        <select name="activity" multiple="" className="form-control dropdown" style={{height:80}}
                             // value={activities.name}
                             onChange={handleControlledInputChange}
+                            multiple
                         >
                             <option value="0">Activity Select</option>
                             {
@@ -174,6 +175,20 @@ export const HomeForm = (props) => {
                         </select>
                     </div>
                 </fieldset>
+
+                {/* <form action="/action_page.php">
+                    <label for="cars">Choose a car:</label>
+                    <select name="cars" id="cars" multiple>
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="opel">Opel</option>
+                        <option value="audi">Audi</option>
+                    </select>
+                    <br><br>
+                    <input type="submit" value="Submit">
+                </form> */}
+
+
                 {/* <fieldset>
                     <div className="form-group">
                         <select name="activity" className="form-control"

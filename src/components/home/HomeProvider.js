@@ -5,6 +5,7 @@ export const HomeContext = React.createContext()
 export const HomeProvider = (props) => {
     const [locations, setLocations] = useState([])
     const [activities, setActivities] = useState([])
+    const [locationsById, setLocationsById] = useState([])
     const [locationactivities, setLocationActivities] = useState([])
     // const [searchLocations, setLocations] = useState("")
     const [ userSearchTerms, setUserSearchTerms ] = useState([])
@@ -94,6 +95,29 @@ export const HomeProvider = (props) => {
             .then(setLocationActivities)
     }
 
+    const addLocationActivities = activity => {
+        return fetch("http://localhost:8000/locationactivities", {
+            method: "POST",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("users")}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(activity)
+        })
+            .then(setLocationActivities)
+    }
+
+    const getLocationById = (id) => {
+        return fetch(`http://localhost:8000/locations/${id}` , {
+            headers: {
+                Authorization: `Token ${localStorage.getItem("users")}`,
+                "Content-Type": "application/json",
+            }
+            })
+            .then(res => res.json())
+            .then(setLocationsById)
+    }
+
 
 
     //  const addPhotos = Photo => {
@@ -121,7 +145,7 @@ export const HomeProvider = (props) => {
 
     return (
         <HomeContext.Provider value={{
-            locations, activities, getLocations, addLocation, addActivities, getActivities, updateLocation, deleteLocation, userSearchTerms, setUserSearchTerms, getLocationActivities, locationactivities
+            locations, activities, getLocations, addLocation, addActivities, getActivities, updateLocation, deleteLocation, userSearchTerms, setUserSearchTerms, getLocationActivities, locationactivities, addLocationActivities, getLocationById, locationsById
         }}>
             {props.children}
         </HomeContext.Provider>

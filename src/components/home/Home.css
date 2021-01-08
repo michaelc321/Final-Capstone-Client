@@ -68,6 +68,9 @@ html {
     /* opacity: 0.8; */
 }
 
+.dropdown {
+    height: 100px;
+}
 
 .footerIcon-h1 {
     display: flex;

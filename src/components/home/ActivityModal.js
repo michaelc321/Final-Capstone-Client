@@ -5,12 +5,12 @@ import { HomeContext } from "./HomeProvider";
 
 export const ActivityModal = (props) => {
   const [open, setOpen] = React.useState(false)
-  const { getLocationActivities, locationactivities } = useContext(HomeContext)
+  const { getLocationActivities, locationactivities, getLocationById, getLocations, locations, locationsById } = useContext(HomeContext)
 
-  const matching = 
 
   useEffect(() => {
-    getLocationActivities(props.location.id)
+    getLocationById(props.location.id)
+    // getLocationActivities(props.location.id)
 }, [])
 
 console.log(props)
@@ -32,10 +32,7 @@ console.log(locationactivities)
       </Header>
       <div className="modal-content">
         <Modal.Content>
-        {locationactivities.map(location => {
-                        console.log([location.activity.name])
-                        return <p>{[location.activity.name]}</p>
-                    })}
+        {props.location.activity.name}
         </Modal.Content>
         <Modal.Actions className="modal-remove">
             <Button basic color='red' inverted onClick={() => setOpen(false)}>
