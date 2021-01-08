@@ -3,6 +3,7 @@ import { Route } from "react-router-dom"
 import { HomeProvider } from "./home/HomeProvider"
 import { HomeList } from "./home/HomeList";
 import { HomeForm } from "./home/HomeForm";
+import { ActivityForm } from "./home/ActivityForm";
 
 export const ApplicationViews = () => {
     return (<>
@@ -16,6 +17,12 @@ export const ApplicationViews = () => {
                 <Route exact path="/location/create" render={(props) => {
                     return <>
                         <HomeForm {...props} />
+                        </>
+                }} />
+
+                <Route exact path="/activity/create" render={(props) => {
+                    return <>
+                        <ActivityForm {...props} />
                         </>
                 }} />
 

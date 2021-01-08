@@ -55,18 +55,22 @@ html {
 .mainList-activity {
     display: flex;
     flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
+    /* flex-wrap: wrap; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
     background: url("./images/background.jpeg") no-repeat fixed center;
     height: 90vh;
-    width: 85vw;
+    /* width: 85vw; */
     border-radius: 2%;
     justify-content: center;
     align-items: center;
-    box-shadow: 4px 1px 7px 5px gray; 
-    opacity: 0.8;
+    /* box-shadow: 4px 1px 7px 5px gray;  */
+    /* opacity: 0.8; */
 }
 
+.dropdown {
+    height: 100px;
+}
 
 .footerIcon-h1 {
     display: flex;
@@ -77,7 +81,14 @@ html {
 .activity-resize {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
+
+.activity-info {
+    display: flex;
+    flex-direction: column;
+}
+
 
 .img-btn {
     border: 1px solid black;
