@@ -10,37 +10,26 @@ import { Button, Icon } from 'semantic-ui-react'
 
 export const HomeList = (props) => {
 
-    const { locations, getLocations, activities, getActivities, userSearchTerms } = useContext(HomeContext)
+    const { locations, locationactivities, getLocations, activities, getActivities, userSearchTerms } = useContext(HomeContext)
 
     const [ userHome, setUserHome ] = useState([])
     const [ userActivities, setUserActivities ] = useState([])
 
-    
-    console.log(userHome)
-    console.log(userActivities)
-    console.log(locations)
-    console.log(activities)
-
     useEffect(() => {
         getLocations()
         getActivities()
-        console.log('1st one ran')
     }, [])
     
     useEffect(() => {
         setUserHome(locations)
         setUserActivities(activities)
-        console.log('3rd one ran')
     }, [locations, activities])
 
 
     useEffect(() => {
         const matchingNames = locations.filter(location => location.title.toLowerCase().includes(userSearchTerms.toString().toLowerCase()))
         setUserHome(matchingNames) 
-        console.log('2nd one ran')
     }, [userSearchTerms])
-    
-    
     
     return (
         <>
@@ -70,9 +59,6 @@ export const HomeList = (props) => {
                     <button class="mainBtn" onClick={() => props.history.push("/location/create")}>
                         Add Card
                     </button>
-                    <button class="mainBtn" onClick={() => props.history.push("/activity/create")}>
-                        Add Activity
-                    </button>
                 </div>
             </div>
         <div className="main">
@@ -94,7 +80,7 @@ export const HomeList = (props) => {
             </div>
         </section>
         <section className="footer-content" id="activity-content">
-            <article className="mainList-activity">
+            {/* <article className="mainList-activity">
             <div className="footerIcon-h1">
                 <Icon name='volleyball ball' className="footer-h1" />
                 Activities
@@ -108,7 +94,7 @@ export const HomeList = (props) => {
                                 />
                     })}
             </article>
-            </article>
+            </article> */}
             <div className="move-btn">
             <Button inverted color='blue' className="move-btn">
             <Icon name='angle double up' />

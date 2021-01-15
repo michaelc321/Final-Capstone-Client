@@ -10,8 +10,6 @@ export const HomeProvider = (props) => {
     // const [searchLocations, setLocations] = useState("")
     const [ userSearchTerms, setUserSearchTerms ] = useState([])
 
-
-
     // GET LOCATIONS
     const getLocations = () => {
         return fetch("http://localhost:8000/locations", {
@@ -81,11 +79,10 @@ export const HomeProvider = (props) => {
             },
             body: JSON.stringify(activity)
         })
-            .then(setActivities)
     }
 
-    const getLocationActivities = (location_id) => {
-        return fetch(`http://localhost:8000/locationactivities?location_id=${location_id}`, {
+    const getLocationActivities = () => {
+        return fetch(`http://localhost:8000/locationactivities`, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("users")}`,
                 "Content-Type": "application/json"
@@ -93,6 +90,17 @@ export const HomeProvider = (props) => {
         })
             .then(res => res.json())
             .then(setLocationActivities)
+    }
+
+    const deleteLocationActivities = locationactivityId => {
+        return fetch(`http://localhost:8000/locationactivities/${locationactivityId}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("users")}`,
+                "Content-Type": "application/json"
+            }
+        })
+            .then(getLocationActivities)
     }
 
     const addLocationActivities = activity => {
@@ -104,7 +112,6 @@ export const HomeProvider = (props) => {
             },
             body: JSON.stringify(activity)
         })
-            .then(setLocationActivities)
     }
 
     const getLocationById = (id) => {
@@ -117,6 +124,19 @@ export const HomeProvider = (props) => {
             .then(res => res.json())
             .then(setLocationsById)
     }
+
+    const updateLocationActivity = (home) => {
+        return fetch(`http://localhost:8000/locations/${home.id}`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("users")}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(home)
+        })
+            .then(getLocations)
+    }
+
 
 
 
@@ -145,7 +165,7 @@ export const HomeProvider = (props) => {
 
     return (
         <HomeContext.Provider value={{
-            locations, activities, getLocations, addLocation, addActivities, getActivities, updateLocation, deleteLocation, userSearchTerms, setUserSearchTerms, getLocationActivities, locationactivities, addLocationActivities, getLocationById, locationsById
+            locations, activities, getLocations, addLocation, deleteLocationActivities, addActivities, getActivities, updateLocation, deleteLocation, userSearchTerms, setUserSearchTerms, getLocationActivities, locationactivities, addLocationActivities, getLocationById, locationsById
         }}>
             {props.children}
         </HomeContext.Provider>

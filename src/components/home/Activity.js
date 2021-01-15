@@ -5,10 +5,8 @@ import "./Home.css"
 
 export const Activity = (props) => {
     
-    console.log("activity")
-    console.log(props.location.activity.name)
 
-    const data = [props.location.activity.name]
+    const data = [props.location]
     return(
         <>
         <div className="activity-info">
