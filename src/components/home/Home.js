@@ -8,13 +8,31 @@ import "./Home.css"
 
 
 export const Home = (props) => {
-    const { deleteLocation, updateMain } = useContext(HomeContext)
-    console.log(props.location.photo)
+    const { deleteLocation, updateMain, deleteLocationActivities, locationactivities, getLocationActivities } = useContext(HomeContext)
     // Cut out part of unusable link, salvaged working part and added https
     const realphoto = 'https://' + props.location.photo.slice(31)
     const year = props.location.time.slice(0, 4)
-    console.log(realphoto)
-    
+
+console.log(locationactivities)
+
+//   const matchingId = locationactivities.find(locationactivityId => {
+//     if (locationactivityId.location_id === props.location.id) {
+//      console.log(locationactivityId.id)
+//       return locationactivityId.id
+//     } else {
+//       return console.log("Didnt find anything!")
+//       }
+//     })
+// console.log(matchingId)
+
+  const matchingId = locationactivities.find(locationactivities => locationactivities.location_id === props.location.id) || {}
+  console.log(matchingId.id)
+  
+    useEffect(() => {
+      getLocationActivities()
+  }, [])
+
+
 return(
 <section className="card-holder">
     <Card>
@@ -33,7 +51,7 @@ return(
         <Icon name='volleyball ball' />
         <ActivityModal {...props}/>
       </a><strong className="spacer">|</strong>
-    <button className="delete" onClick={() => deleteLocation(props.location.id)}>Delete</button>
+    <button className="delete" onClick={() => deleteLocationActivities(matchingId.id).then(() => deleteLocation(props.location.id))}>Delete</button>
     <button className="edit"
         onClick={() => {
             props.history.push(`/location/edit/${props.location.id}`)

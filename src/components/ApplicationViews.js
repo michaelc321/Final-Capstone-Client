@@ -29,6 +29,11 @@ export const ApplicationViews = () => {
                 <Route path="/location/edit/:locationId(\d+)" render={(props) => {
                     return <HomeForm {...props} />
                 }} />
+
+                <Route path="/location/activities/:activityId(\d+)" render={(props) => {
+                            return <HomeForm {...props} />
+                        }} />
         </HomeProvider>
+
     </> )
 }
