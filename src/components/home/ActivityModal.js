@@ -6,7 +6,7 @@ import { HomeContext } from "./HomeProvider";
 
 export const ActivityModal = (props) => {
   const [open, setOpen] = React.useState(false)
-  const { getLocationActivities, locationactivities,} = useContext(HomeContext)
+  const { getLocationActivities, locationactivities} = useContext(HomeContext)
 
   const matchingId = locationactivities.map(locationactivityId => {
     if (locationactivityId.location_id === props.location.id) {
@@ -23,7 +23,7 @@ export const ActivityModal = (props) => {
     return (
       <Modal
       basic
-      onClose={() => setOpen(false)}
+      onClose={() => setOpen(false).then(() => props.history.push("/home#card-content"))}
       onOpen={() => {setOpen(true)
       }}
       open={open}
@@ -32,19 +32,20 @@ export const ActivityModal = (props) => {
       >
       <Header icon>
         <Icon name='volleyball ball' />
-        Activities for {props.location.title}
+        Activities for <b><i>{props.location.title}</i></b>
       </Header>
       <div className="modal-content">
-        <Modal.Content>
+        <Modal.Content className="matchingId">
   
-          {matchingId}
+          {matchingId.map(id => {
+            return <div className="matchId_text">{id}</div>
+          })}
         
         </Modal.Content>
         <Modal
             trigger={<Button>Add Activity</Button>}
             header="Let's add some activities!"
             content={<ActivityForm {...props}/>}
-            actions={[{ key: 'done', content: 'Done', positive: true }]}
             />
         <Modal.Actions className="modal-remove">
             <Button basic color='red' inverted onClick={() => setOpen(false)}>

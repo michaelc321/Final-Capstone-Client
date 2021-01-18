@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from "react"
 import { HomeContext } from "./HomeProvider"
-// import { ActivityButton } from "./ActivityButton";
 import { Button, Icon, Modal } from 'semantic-ui-react'
 import "./Home.css"
 
 export const ActivityForm = (props) => {
     const [open, setOpen] = React.useState(false)
-    const { getActivities, getLocations, activities, addLocationActivities, locations, addActivities } = useContext(HomeContext)
-    // const editMode = props.match.params.hasOwnProperty("locationId") 
+    const { getActivities, getLocations, activities, addLocationActivities, locations, addActivities } = useContext(HomeContext) 
     const [activity, setActivity] = useState({})
     const handleControlledInputChange = (event) => {
         const newactivity = Object.assign({}, activity)         
@@ -23,11 +21,11 @@ export const ActivityForm = (props) => {
 
     return (
         <>
-        <form className="form--content">
+        <form className="modal-modal" noValidate>
             
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="activity">Activity Creation </label>
+                    <label htmlFor="activity" >Activity Creation </label>
                     <input type="text" name="name" id="activityName" required autoFocus className="form-control" 
                     placeholder="Create activity"
                     defaultValue={activity.name}
@@ -35,20 +33,20 @@ export const ActivityForm = (props) => {
                 </div>
             </fieldset>
 
-            <button type="submit" onClick={() => window.location.reload()}
+            <button type="submit"
             onClick={evt => {
                     evt.preventDefault()
                     addActivities({
                         name: activity.name
-                    })
+                    }).then(getActivities())
                 }}
-                className="form-group btn btn-primary ml-3">
+                className="form-group btn btn-primary ml-3 modalbutton">
                 Save New Activity
             </button>
             <fieldset>
                     <div className="form-group">
                         <select name="activity" className="form-control"
-                            // value={location.name}
+
                             onChange={handleControlledInputChange}
                         >
                             <option value="0">Select Activity</option>
@@ -61,7 +59,7 @@ export const ActivityForm = (props) => {
                     </div>
                 </fieldset>
 
-            <button type="submit" onClick={() => props.history.push("/home")}
+            <button type="submit"
                 onClick={evt => {
                     evt.preventDefault()
                     addLocationActivities({
@@ -69,7 +67,7 @@ export const ActivityForm = (props) => {
                         activity_id: activity.activity
                     })
                 }}
-                className="form-group btn btn-primary ml-3">
+                className="form-group btn btn-primary ml-3 modalbutton">
                 Add New Activity to Card
             </button>
             <Modal
@@ -79,7 +77,7 @@ export const ActivityForm = (props) => {
                 size='small'
             ></Modal>
             <Modal.Actions className="modal-remove">
-            <Button basic color='red' inverted onClick={() => setOpen(false)}>
+            <Button className="closeBtn" basic color='red' inverted onClick={() => setOpen(false)}>
             <Icon name='remove' /> Close
             </Button>
         </Modal.Actions>

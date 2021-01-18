@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
 import { HomeContext } from "./HomeProvider"
-import { ActivityForm } from "./ActivityForm";
-import { Button } from 'semantic-ui-react'
 import "./Home.css"
 
 
@@ -112,6 +110,7 @@ export const HomeForm = (props) => {
     return (
         <>
         <form className="form--content">
+                <div className="form-card">
             <fieldset>
                 <h2 className="locationForm__title">{editMode ? "Update location" : "Create Card"}</h2>
                 {editMode 
@@ -148,7 +147,7 @@ export const HomeForm = (props) => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="size">Details: </label>
-                    <textarea type="text" name="description" id="description" required autoFocus className="form-control" 
+                    <textarea type="text" name="description" id="description" required autoFocus className="form-control" style={{height: '80px'}}
                     placeholder="Enter Text"
                     defaultValue={location.description}
                     onChange={handleControlledInputChange} />
@@ -168,6 +167,7 @@ export const HomeForm = (props) => {
                 {editMode ? "Save Updates" : "Save New location"}
             </button>
             <button onClick={() => props.history.push("/home")} className="form-group btn btn-primary ml-3">Cancel</button>
+            </div>
         </form>
         </>
     )
